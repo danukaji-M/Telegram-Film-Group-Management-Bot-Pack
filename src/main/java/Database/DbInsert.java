@@ -1,2 +1,4 @@
-package Database;public class Database {
+package Database;
+
+public class DbInsert {
 }

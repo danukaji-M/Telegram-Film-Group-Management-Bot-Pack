@@ -1,2 +1,4 @@
-package Database;public class DBUpdate {
+package Database;
+
+public class DBUpdate {
 }

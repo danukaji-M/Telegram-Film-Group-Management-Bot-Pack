@@ -1,2 +1,4 @@
-package Database;public class DbSelect {
+package Database;
+
+public class DbSelect {
 }

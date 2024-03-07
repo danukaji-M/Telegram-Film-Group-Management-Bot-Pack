@@ -1,2 +1,4 @@
-package Database;public class DbConnection {
+package Database;
+
+public class DbConnection {
 }

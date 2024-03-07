@@ -1,2 +1,4 @@
-package Database;public class DbDelete {
+package Database;
+
+public class DbDelete {
 }
