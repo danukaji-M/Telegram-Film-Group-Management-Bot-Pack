@@ -3,9 +3,25 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class TvSeries extends TelegramLongPollingBot {
-    TvSeries(){
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
+public class TvSeries extends TelegramLongPollingBot {
+    private static final String CONFIG_FILE_PATH = "bot-config.properties";
+    private static String BOT_TOKEN;
+    private static String BOT_NAME;
+    TvSeries(){
+        Properties properties = new Properties();
+        try{
+            properties.load(new FileInputStream(CONFIG_FILE_PATH));
+            BOT_NAME= properties.getProperty("tv.series.bot.username");
+            BOT_TOKEN=properties.getProperty("tv.series.bot.token");
+            System.out.println("bot name is :" +BOT_NAME);
+            System.out.println("bot token is :" +BOT_TOKEN);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     @Override
     public void onUpdateReceived(@NotNull Update update) {
@@ -17,12 +33,12 @@ public class TvSeries extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "DSK Tv Series Bot";
+        return BOT_NAME;
     }
 
     @Override
     public String getBotToken() {
-        return "6651173985:AAGfdzCBxYjQIt5XDvf3uDT777RxMPM7f2U";
+        return BOT_TOKEN;
     }
 
 

@@ -3,12 +3,29 @@ import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class GroupManager extends TelegramLongPollingBot{
-    GroupManager(){
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
+public class GroupManager extends TelegramLongPollingBot{
+    private static final String CONFIG_FILE_PATH = "bot-config.properties";
+    private static String BOT_TOKEN;
+    private static String BOT_NAME;
+    GroupManager(){
+        Properties properties = new Properties();
+        try{
+            properties.load(new FileInputStream(CONFIG_FILE_PATH));
+            BOT_NAME= properties.getProperty("manager.bot.username");
+            BOT_TOKEN=properties.getProperty("manager.bot.token");
+            System.out.println("bot name is :" +BOT_NAME);
+            System.out.println("bot token is :" +BOT_TOKEN);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     @Override
     public void onUpdateReceived(@NotNull Update update) {
+
         var msg = update.getMessage().getText();
         System.out.println( getBotUsername());
         System.out.println(msg);
@@ -16,12 +33,12 @@ public class GroupManager extends TelegramLongPollingBot{
 
     @Override
     public String getBotUsername() {
-        return "DSK Group Manager";
+        return BOT_NAME;
     }
 
     @Override
     public String getBotToken() {
-        return "6667393200:AAHYn0L6AG_9CTJ3r5Q0S4JLszzcntOKReE";
+        return BOT_TOKEN;
     }
 
 }
